@@ -15,6 +15,11 @@ jobs:
         run: env
       - name: List files
         run: ls -l
+      - name: check docker images
+        run: docker images
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
       - name: check node version
         run: node --version
       # - uses: actions/setup-node@v3
