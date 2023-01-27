@@ -26,4 +26,6 @@ jobs:
       #   with:
       #     node-version: 16
       - name: Get Secret
-        run: echo ${{ secrets.MY_SECRET }}
+        run: echo ${{ secrets.MY_SECRET }} > test
+      - name: Get test
+        run: cat test
