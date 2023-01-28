@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          set_docker_host_env: 'false'
+          # set_docker_host_env: 'false'
 
       - run: |
           docker ps
