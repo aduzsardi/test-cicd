@@ -8,49 +8,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      # - name: Login to GitHub Container Registry
-      #   uses: docker/login-action@v2
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.repository_owner }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Echo github run number
-      #   run: |
-      #     echo 1 ${{ env.GITHUB_RUN_NUMBER }}
-      #     echo 2 $GITHUB_RUN_NUMBER
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v2.3.0
+        with:
+          driver: docker
 
-      # - name: Docker Setup Buildx
-      #   uses: docker/setup-buildx-action@v2.3.0
-      #   with:
-      #     driver: docker
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.3.0
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.run_number }}
 
-      # - name: Build and push Docker images
-      #   uses: docker/build-push-action@v3.3.0
-      #   with:
-      #     context: .
-      #     push: false
-      #     tags: |
-      #       ghcr.io/${{ github.repository }}:latest
-      #       ghcr.io/${{ github.repository }}:${{ github.run_number }}
-        # env:
-        #   BUILD: ${{ vars.GITHUB_RUN_NUMBER }}
-      # - uses: pcjun97/action-setup-docker-host-ssh@v1
-      #   id: docker-ssh
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     user: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     # set_docker_host_env: 'false'
-
-      # - run: |
-      #     docker ps
-      #   env:
-      #     DOCKER_HOST: ${{ steps.docker-ssh.outputs.docker-host }}
-      # - name: Echo github run number
-      #   run: cat $GITHUB_ENV
       - name: Setup remote docker
         run: |
           mkdir ~/.ssh
@@ -59,4 +39,4 @@ jobs:
           eval `ssh-agent -s`
           echo "${{ secrets.SSH_KEY }}" | ssh-add -
           export DOCKER_HOST=ssh://${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-          docker ps -a
+          docker compose up -d
