@@ -26,7 +26,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ vars.GITHUB_RUN_NUMBER }}
+            ghcr.io/${{ github.repository }}:$BUILD
+        env:
+          BUILD: ${{ vars.GITHUB_RUN_NUMBER }}
       # - uses: pcjun97/action-setup-docker-host-ssh@v1
       #   id: docker-ssh
       #   with:
