@@ -19,7 +19,7 @@ jobs:
 
       - name: Echo github run number
         run: |
-          echo 1 ${{ vars.GITHUB_RUN_NUMBER }}
+          echo 1 ${{ env.GITHUB_RUN_NUMBER }}
           echo 2 $GITHUB_RUN_NUMBER
 
       - name: Docker Setup Buildx
@@ -34,7 +34,7 @@ jobs:
           push: false
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${GITHUB_RUN_NUMBER}
+            ghcr.io/${{ github.repository }}:${{ env.GITHUB_RUN_NUMBER }}
         # env:
         #   BUILD: ${{ vars.GITHUB_RUN_NUMBER }}
       # - uses: pcjun97/action-setup-docker-host-ssh@v1
