@@ -32,7 +32,6 @@ jobs:
         with:
           context: .
           push: true
-          driver: docker
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:$GITHUB_RUN_NUMBER
