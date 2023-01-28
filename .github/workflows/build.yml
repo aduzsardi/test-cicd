@@ -24,11 +24,12 @@ jobs:
         with:
           context: .
           push: true
+          driver: docker
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:$BUILD
-        env:
-          BUILD: ${{ vars.GITHUB_RUN_NUMBER }}
+            ghcr.io/${{ github.repository }}:$GITHUB_RUN_NUMBER
+        # env:
+        #   BUILD: ${{ vars.GITHUB_RUN_NUMBER }}
       # - uses: pcjun97/action-setup-docker-host-ssh@v1
       #   id: docker-ssh
       #   with:
