@@ -49,3 +49,5 @@ jobs:
       #     docker ps
       #   env:
       #     DOCKER_HOST: ${{ steps.docker-ssh.outputs.docker-host }}
+      - name: Echo github run number
+        run: env
