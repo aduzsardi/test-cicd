@@ -19,7 +19,7 @@ jobs:
 
       - name: Echo github run number
         run: |
-          echo 1 ${{ github.run_number }}
+          echo 1 ${{ env.GITHUB_RUN_NUMBER }}
           echo 2 $GITHUB_RUN_NUMBER
 
       - name: Docker Setup Buildx
