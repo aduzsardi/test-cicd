@@ -22,15 +22,16 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-      - uses: pcjun97/action-setup-docker-host-ssh@v1
-        id: docker-ssh
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          # set_docker_host_env: 'false'
+            ghcr.io/${{ github.repository }}:${GITHUB_RUN_NUMBER}
+      # - uses: pcjun97/action-setup-docker-host-ssh@v1
+      #   id: docker-ssh
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     user: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     # set_docker_host_env: 'false'
 
-      - run: |
-          docker ps
-        env:
-          DOCKER_HOST: ${{ steps.docker-ssh.outputs.docker-host }}
+      # - run: |
+      #     docker ps
+      #   env:
+      #     DOCKER_HOST: ${{ steps.docker-ssh.outputs.docker-host }}
