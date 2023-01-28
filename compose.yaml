@@ -5,7 +5,7 @@ services:
     container_name: app
     environment:
       - MYVAR=$TESTVAR
-      - MYOTHER=${{ secrets.SSH_HOST }}
+      # - MYOTHER=${{ secrets.SSH_HOST }}
       # - PGID=1000
       # - TZ=America/New_York
       # - PMA_ARBITRARY=1 #optional
