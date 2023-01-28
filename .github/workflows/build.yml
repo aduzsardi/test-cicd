@@ -54,6 +54,6 @@ jobs:
       - name: Setup remote docker
         run: |
           eval `ssh-agent -s`
-          echo ${{ secrets.SSH_KEY }} | ssh-add -
+          echo "${{ secrets.SSH_KEY }}" | ssh-add -
       # export DOCKER_HOST=${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
       # docker ps -a
