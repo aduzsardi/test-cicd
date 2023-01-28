@@ -3,13 +3,13 @@ services:
   app:
     image: ghcr.io/aduzsardi/test-cicd:latest
     container_name: app
-    # environment:
-      # - PUID=1000
+    environment:
+      - MYVAR=${ TESTVAR }
       # - PGID=1000
       # - TZ=America/New_York
       # - PMA_ARBITRARY=1 #optional
       # - PMA_ABSOLUTE_URI=https://phpmyadmin.example.com #optional
     ports:
-      - 5000:5000
+      - 127.0.0.1:5000:5000
     restart: unless-stopped
     pull_policy: always
