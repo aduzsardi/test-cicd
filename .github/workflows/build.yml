@@ -53,7 +53,10 @@ jobs:
       #   run: cat $GITHUB_ENV
       - name: Setup remote docker
         run: |
+          mkdir ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
           eval `ssh-agent -s`
           echo "${{ secrets.SSH_KEY }}" | ssh-add -
-          export DOCKER_HOST=${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          export DOCKER_HOST=ssh://${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
           docker ps -a
