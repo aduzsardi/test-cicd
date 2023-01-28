@@ -4,7 +4,8 @@ services:
     image: ghcr.io/aduzsardi/test-cicd:latest
     container_name: app
     environment:
-      - MYVAR=${ TESTVAR }
+      - MYVAR=$TESTVAR
+      - MYOTHER=${{ secrets.SSH_HOST }}
       # - PGID=1000
       # - TZ=America/New_York
       # - PMA_ARBITRARY=1 #optional
