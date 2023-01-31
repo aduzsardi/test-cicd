@@ -7,17 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Hello world action step
-      #   id: hello
-      #   uses: aduzsardi/hello-world-docker-action@v2
-      #   with:
-      #     who-to-greet: 'Mona the Octocat'
-      # # Use the output from the `hello` step
-      # - name: Get the output time
-      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
-
-      # - name: My javascript action
-      #   uses: aduzsardi/hello-world-javascript-action@v1.1
       - uses: actions/checkout@v2
 
       - name: Login to GitHub Container Registry
@@ -39,17 +28,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${ GITHUB_RUN_NUMBER }
-          # ghcr.io/${{ github.repository }}:${{ github.run_number }}
-
-      # - name: Setup remote docker
-      #   run: |
-      #     mkdir ~/.ssh
-      #     chmod 700 ~/.ssh
-      #     ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-      #     eval `ssh-agent -s`
-      #     echo "${{ secrets.SSH_KEY }}" | ssh-add -
-      #     export DOCKER_HOST=ssh://${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-      #     docker compose up -d
-      #   env:
-      #     TESTVAR: ${{ secrets.SSH_USER }}
+            ghcr.io/${{ github.repository }}:${{ env.GITHUB_RUN_NUMBER }}
