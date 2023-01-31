@@ -21,6 +21,9 @@ jobs:
         with:
           driver: docker
 
+      - name: Echo build number variable
+        run: echo ${{ env.GITHUB_RUN_NUMBER }}
+
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.3.0
         with:
@@ -28,4 +31,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ env.GITHUB_RUN_NUMBER }}
+            ghcr.io/${{ github.repository }}:${{ github.run_number }}
