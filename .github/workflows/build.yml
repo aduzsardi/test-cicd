@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ env.GITHUB_RUN_NUMBER }}
+            ghcr.io/${{ github.repository }}:$GITHUB_RUN_NUMBER
           # ghcr.io/${{ github.repository }}:${{ github.run_number }}
 
       # - name: Setup remote docker
